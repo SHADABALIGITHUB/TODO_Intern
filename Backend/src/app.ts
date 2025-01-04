@@ -1,7 +1,7 @@
 import express from 'express';
 import {Port} from "./config/environment";
 import mongoConnection from "./config/mongoConnection";
-
+import router from './routes/task.route';
 
 const app = express();
 
@@ -9,9 +9,7 @@ const app = express();
 app.use(express.json({ limit: '50mb' }));
 
 // Routes
-app.get('/api/v1',()=>{
-    console.log('Welcome to Todo App')
-} );
+app.use('/api/v1',router)
 
 // Start server
 app.listen(Port, async () => {
