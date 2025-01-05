@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import React, { SetStateAction } from "react";
 import { Todo,Status } from "../Context/TodoContext";
+import { enqueueSnackbar } from "notistack";
 
 interface DialogProps {
     open: boolean;
@@ -27,6 +28,7 @@ const Dialog: React.FC<DialogProps> = ({open,todo,action,Close}) => {
     const handleStatusToggle = () => {
          console.log("At toogle final call",selectedStatus);
          action(todo._id,selectedStatus);
+         enqueueSnackbar("Task Updated",{variant:"success",autoHideDuration:2000});
       };
 
     return (

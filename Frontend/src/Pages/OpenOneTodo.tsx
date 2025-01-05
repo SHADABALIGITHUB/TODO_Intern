@@ -7,6 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { enqueueSnackbar } from 'notistack';
 
 const OpenOneTodo: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -68,7 +69,7 @@ const OpenOneTodo: React.FC = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Want to Change</Button>
+          <Button size="small" onClick={()=>{enqueueSnackbar("Under work",{variant:"success",autoHideDuration:2000})}}>Want to Change</Button>
         </CardActions>
       </Card>
     </Box>

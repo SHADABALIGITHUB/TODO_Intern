@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useTodos } from '../Context/TodoContext';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+
 const CreateNewTask: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const { addTodo } = useTodos();
   const navigate = useNavigate();
+  const {enqueueSnackbar} = useSnackbar();  
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     await addTodo(title, description);
     setTitle('');
     setDescription('');
+    enqueueSnackbar('Task created successfully!', {variant: 'success',autoHideDuration: 2000});
     navigate('/');
   };
 

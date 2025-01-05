@@ -20,6 +20,7 @@ interface ShowListProps {
     
 }
 import Dialog from "./Dialog";
+import { enqueueSnackbar } from "notistack";
 
 
 const ShowList:React.FC<ShowListProps>= ({list,totalPages,currentPage,setCurrentPage}) => {
@@ -64,7 +65,7 @@ const ShowList:React.FC<ShowListProps>= ({list,totalPages,currentPage,setCurrent
                   <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{openTask(todo._id)}}>
                     <OpenInNew color="info" />
                   </IconButton>
-                  <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{deleteTodo(todo._id)}}>
+                  <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{enqueueSnackbar("Task Removed",{variant:"error",autoHideDuration:2000});deleteTodo(todo._id)}}>
                     <DeleteIcon color="error" />
                   </IconButton>
                   <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{openEditDialog(todo)}}>
