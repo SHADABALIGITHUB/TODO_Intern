@@ -3,11 +3,12 @@ import {
     Card,
     CardContent,
     Typography,
-    Checkbox,
     IconButton,
     Pagination,
+    Chip,
+    Box as MuiDiv
   } from "@mui/material";
-import {RadioButtonUncheckedOutlined, CheckCircle, Delete as DeleteIcon,EditCalendar,OpenInNew } from "@mui/icons-material";
+import {Delete as DeleteIcon,EditCalendar,OpenInNew } from "@mui/icons-material";
 import EmptyPage from "./EmptyPage";
 import { Todo,useTodos } from "../Context/TodoContext";
 import { useNavigate } from "react-router-dom";
@@ -44,26 +45,32 @@ const ShowList:React.FC<ShowListProps>= ({list,totalPages,currentPage,setCurrent
         {list.length!==0?list.map((todo) => (
             <Card key={todo._id} sx={{ margin: 3 }} className="bg-white cursor-pointer dark:bg-black  text-black dark:text-white">
               <CardContent >
-                <Typography variant="h6" component="h6">
-                  <Checkbox
-                    className="text-black dark:text-white"
-                    icon={<RadioButtonUncheckedOutlined />}
-                    checkedIcon={<CheckCircle />}
+              
+                <MuiDiv>
+                  
+                    <Chip
+                    size="small"
+                    sx={{ 
+                        margin: 1,
+                        display: {xs:"flex",sm:"inline-block"},
+                      }}
+                    label={todo.status}
                     color={todo.status === "completed" ? "success" : todo.status === "pending" ? "warning" : "info"}
-                    checked={true}
-                    readOnly
+                    
                   />
-                  {todo.title}
-                  <IconButton style={{ float: "right" }} onClick={() =>{openTask(todo._id)}}>
+                   
+                 <Typography variant="h6" component="h6" sx={{display:{sm:"inline",xs:"none"}}}> {todo.title.charAt(0).toUpperCase() + todo.title.slice(1).toLowerCase()} </Typography>
+
+                  <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{openTask(todo._id)}}>
                     <OpenInNew color="info" />
                   </IconButton>
-                  <IconButton style={{ float: "right" }} onClick={() =>{deleteTodo(todo._id)}}>
+                  <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{deleteTodo(todo._id)}}>
                     <DeleteIcon color="error" />
                   </IconButton>
-                  <IconButton style={{ float: "right" }} onClick={() =>{openEditDialog(todo)}}>
+                  <IconButton sx={{ float:{sm:"right"}}} onClick={() =>{openEditDialog(todo)}}>
                     <EditCalendar color="warning" />
                   </IconButton>
-                </Typography>
+                </MuiDiv>
               </CardContent>
             </Card>
           )):<EmptyPage/>}

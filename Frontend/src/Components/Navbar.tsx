@@ -20,6 +20,7 @@ const Navbar = () => {
 
     const toggleDarkMode = () => {
         const root = document.documentElement;
+        setIsMenuOpen(false);
         if (isDarkMode) {
             root.classList.remove('dark');
         } else {
@@ -84,7 +85,7 @@ const Navbar = () => {
                 </div>
                 <button
                     onClick={toggleDarkMode}
-                    className="px-4 py-2 rounded text-black dark:text-white"
+                    className="hidden md:block px-4 py-2 rounded text-black dark:text-white"
                 >
                     {isDarkMode ? <Sun /> : <Moon />}
                 </button>
@@ -128,6 +129,12 @@ const Navbar = () => {
                     >
                         create
                     </NavLink>
+                    <button
+                    onClick={toggleDarkMode}
+                    className="px-4 py-2 rounded text-black dark:text-white"
+                >
+                    {isDarkMode ? <Sun /> : <Moon />}
+                </button>
                 
                 </div>
             )}

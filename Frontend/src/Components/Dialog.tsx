@@ -31,7 +31,7 @@ const Dialog: React.FC<DialogProps> = ({open,todo,action,Close}) => {
 
     return (
         <MuiDialog open={open} className="relative bg-white dark:bg-black text-black dark:text-white">
-            <div className="flex flex-col p-4">
+            <div className="flex flex-col p-4 md:w-96 m-2">
             <Typography variant="h6" className="text-black">Title:{todo.title}</Typography>
             <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">Task Status:{todo.status}</FormLabel>

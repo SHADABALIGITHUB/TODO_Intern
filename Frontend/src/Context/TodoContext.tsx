@@ -98,7 +98,6 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setError(null);
     try {
       const response = await axiosInstance.get(`/api/v1/tasks/${id}`);
-      console.log(response)
       return response.data;
    } catch (err: any) {
       setError(err.message || 'Failed to fetch todos');
