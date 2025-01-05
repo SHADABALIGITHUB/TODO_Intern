@@ -29,7 +29,7 @@ const CreateNewTask: React.FC = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border rounded dark:bg-zinc-900 dark:border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
           <div>
@@ -41,7 +41,7 @@ const CreateNewTask: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-              className="w-full p-2 border min-h-10 max-h-72 rounded dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border min-h-10 max-h-72 rounded dark:bg-zinc-900 dark:border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
             ></textarea>
           </div>
           

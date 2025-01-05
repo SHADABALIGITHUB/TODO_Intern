@@ -46,7 +46,7 @@ export default function CustomizedBreadcrumbs() {
                     onClick={handleClick} 
                 />
                 {pathSegments.map((segment) => {
-                    return  <StyledBreadcrumb key={segment} label={segment} />
+                    return  <StyledBreadcrumb key={segment} label={segment.length<8?segment:segment.slice(0,8)} />
                 })}
             </Breadcrumbs>
         </button>

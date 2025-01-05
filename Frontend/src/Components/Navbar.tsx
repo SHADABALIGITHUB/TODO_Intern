@@ -58,13 +58,13 @@ const Navbar = () => {
                         Completed
                     </NavLink>
                     <NavLink
-                        to="/delete"
+                        to="/progress"
                         onClick={closeMenu}
                         className={({ isActive }) => `font-medium 
                            ${isActive ? "text-blue-600 border-b-2 border-blue-600" : "text-grey-600 dark:text-white"}
                            `}
                     >
-                        Deleted
+                        Progress
                     </NavLink>
                     <NavLink
                         to="/create"
@@ -111,13 +111,13 @@ const Navbar = () => {
                         Completed
                     </NavLink>
                     <NavLink
-                        to="/delete"
+                        to="/progress"
                         onClick={closeMenu}
                         className={({ isActive }) =>
                             `text-xl font-medium ${isActive ? "text-blue-600" : "text-gray-600 dark:text-white"}`
                         }
                     >
-                        Deleted
+                       progress
                     </NavLink>
                     <NavLink
                         to="/create"

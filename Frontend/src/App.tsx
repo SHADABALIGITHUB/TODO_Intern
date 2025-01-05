@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout.tsx";
 import Home from "./Pages/Home.tsx"
 import CreateNewTask from "./Pages/createNewTask.tsx";
-import Delete from "./Pages/DeletedItems.tsx";
+import ProgressTask from "./Pages/ProgressTask.tsx";
 import CompletedTask from "./Pages/CompletedTask.tsx";
 import OpenOneTodo from "./Pages/OpenOneTodo.tsx";
 function App() {
@@ -16,7 +16,7 @@ function App() {
                     <Route path="task/:id" element={<OpenOneTodo />} />
                     <Route path="completed" element={<CompletedTask />} />
                     <Route path="create" element={<CreateNewTask />} />
-                    <Route path="delete" element={<Delete />} />
+                    <Route path="progress" element={<ProgressTask/>} />
 
                 </Route>
             </Routes>

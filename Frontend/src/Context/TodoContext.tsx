@@ -1,13 +1,16 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import axiosInstance from '../utils/AxiosInstance';
 
+export const status = ["completed", "in-progress", "pending"] as const;
 
+export type Status = typeof status[number];
 export interface Todo {
   _id: number;
   title: string;
   description: string;
-  status: "completed" | "in-progress" | "pending";
+  status: Status;
 }
+
 
 interface TodoContextType {
   todos: Todo[];
@@ -15,9 +18,9 @@ interface TodoContextType {
   error: string | null;
   fetchTodos: () => Promise<void>;
   addTodo: (title: string, description: string) => Promise<void>;
-  updateTodo: (id: number, updatedData: Partial<Todo>) => Promise<void>;
+  updateTodo: (id: number, status:Status) => Promise<void>;
   deleteTodo: (id: number) => Promise<void>;
-  getOneTodo: (id: number) => Promise<void>;
+  getOneTodo: (id: string) =>  Promise<Todo | null>;
 }
 
 // Initial context
@@ -61,11 +64,11 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   // Update a todo
-  const updateTodo = async (id: number, updatedData: Partial<Todo>) => {
+  const updateTodo = async (id: number, status:Status) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axiosInstance.put(`/api/v1/tasks/${id}`, updatedData);
+      const response = await axiosInstance.put(`/api/v1/tasks/${id}`,{status:status});
       setTodos((prev) =>
         prev.map((todo) => (todo._id === id ? { ...todo, ...response.data } : todo))
       );
@@ -90,14 +93,16 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const getOneTodo = async (id: number) => {
+  const getOneTodo = async (id: string) => {
     setLoading(true);
     setError(null);
     try {
       const response = await axiosInstance.get(`/api/v1/tasks/${id}`);
-      setTodos(response.data);
-    } catch (err: any) {
+      console.log(response)
+      return response.data;
+   } catch (err: any) {
       setError(err.message || 'Failed to fetch todos');
+      return null;
     } finally {
       setLoading(false);
     }

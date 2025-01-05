@@ -3,7 +3,7 @@ import Loader from "../Components/Loader";
 import ShowList from "../Components/ShowList";
 import { Todo, useTodos } from "../Context/TodoContext";
 
-const CompletedTask:React.FC = () => {
+const ProgressTask: React.FC = () => {
 
   const {todos, loading, error} = useTodos();
 
@@ -15,7 +15,7 @@ const CompletedTask:React.FC = () => {
  
   useEffect(() => {
     if (todos) {
-      const progress = todos.filter((todo) => todo.status === "completed");
+      const progress = todos.filter((todo) => todo.status === "in-progress");
       setProgressTodos(progress);
     }
   }, [todos]);
@@ -32,4 +32,4 @@ const CompletedTask:React.FC = () => {
   );
 }
 
-export default CompletedTask;
+export default ProgressTask;
