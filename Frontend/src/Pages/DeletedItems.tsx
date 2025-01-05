@@ -5,10 +5,10 @@ import Loader from "../Components/Loader";
 import ShowList from "../Components/showList";
 
 
-const Home: React.FC = () => {
+const Delete: React.FC = () => {
 
-
-  const { todos, loading, error } = useSelector(selectTodos);
+  const [todos] = useState([]);
+  const {loading, error } = useSelector(selectTodos);
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 5;
 
@@ -22,8 +22,10 @@ const Home: React.FC = () => {
   }
 
   return (
-     <ShowList list={paginatedTasks} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+  
+       <ShowList list={paginatedTasks} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+    
   );
 }
 
-export default Home;
+export default Delete;
