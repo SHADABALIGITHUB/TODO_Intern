@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-
+import { useTodos } from '../Context/TodoContext';
+import { useNavigate } from 'react-router-dom';
 const CreateNewTask: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('pending');
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const { addTodo } = useTodos();
+  const navigate = useNavigate();
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    const newTask = { title, description, status };
-    console.log('Task Created:', newTask);
+    await addTodo(title, description);
     setTitle('');
     setDescription('');
-    setStatus('pending');
+    navigate('/');
   };
 
   return (
-    <div className="bg-white max-w-md dark:bg-black text-black dark:text-white">
-      <div className="w-full p-6 rounded shadow-md">
+    <div className="w-full bg-inherit h-full flex items-center justify-center">
+      <div className="w-full max-w-md border dark:border-black p-6 rounded shadow-md dark:bg-black text-black dark:text-white">
         <h2 className="text-2xl font-semibold mb-4 text-center">Add New Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -41,7 +41,7 @@ const CreateNewTask: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-              className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border min-h-10 max-h-72 rounded dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></textarea>
           </div>
           

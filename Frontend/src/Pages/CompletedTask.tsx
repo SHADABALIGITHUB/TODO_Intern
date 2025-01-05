@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShowList from '../Components/showList';
+import ShowList from '../Components/ShowList';
 
 const CompletedTask: React.FC = () => {
     const [todos] = useState([]);

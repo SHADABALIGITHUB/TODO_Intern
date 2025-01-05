@@ -1,3 +1,4 @@
+import React from "react";
 import {
     Card,
     CardContent,
@@ -6,27 +7,37 @@ import {
     IconButton,
     Pagination,
   } from "@mui/material";
-import {RadioButtonUncheckedOutlined, CheckCircle, Delete as DeleteIcon } from "@mui/icons-material";
+import {RadioButtonUncheckedOutlined, CheckCircle, Delete as DeleteIcon,EditCalendar } from "@mui/icons-material";
 import EmptyPage from "./EmptyPage";
+import { Todo,useTodos } from "../Context/TodoContext";
 
-interface Todo {
-    id: number;
-    title: string;
-    description:string;
-    completed: boolean;
-}
 interface ShowListProps {
     list: Todo[];
     totalPages: number;
     currentPage: number;
     setCurrentPage: (page: number) => void;
+    
 }
+import Dialog from "./Dialog";
+
 
 const ShowList:React.FC<ShowListProps>= ({list,totalPages,currentPage,setCurrentPage}) => {
+     const {deleteTodo} = useTodos();
+     const {updateTodo} = useTodos();
+     const [openDialog, setOpenDialog] = React.useState(false);
+     const [tempTodo, setTempTodo] = React.useState<Todo | null>(null);
+
+     const openEditDialog = (todo:Todo) => {
+        setOpenDialog(true);
+        setTempTodo(todo);
+
+      }
+   
     return (
         <>
+        {tempTodo && <Dialog open={openDialog} todo={tempTodo} action={updateTodo} Close={setOpenDialog} />}
         {list.length!==0?list.map((todo) => (
-            <Card key={todo.id} sx={{ margin: 3 }} className="bg-white dark:bg-black  text-black dark:text-white">
+            <Card key={todo._id} sx={{ margin: 3 }} className="bg-white dark:bg-black  text-black dark:text-white">
               <CardContent >
                 <Typography variant="h6" component="h6">
                   <Checkbox
@@ -34,10 +45,14 @@ const ShowList:React.FC<ShowListProps>= ({list,totalPages,currentPage,setCurrent
                     icon={<RadioButtonUncheckedOutlined />}
                     checkedIcon={<CheckCircle />}
                     color="primary"
+                    readOnly
                   />
                   {todo.title}
-                  <IconButton style={{ float: "right" }}>
+                  <IconButton style={{ float: "right" }} onClick={() =>{deleteTodo(todo._id)}}>
                     <DeleteIcon color="error" />
+                  </IconButton>
+                  <IconButton style={{ float: "right" }} onClick={() =>{openEditDialog(todo)}}>
+                    <EditCalendar color="warning" />
                   </IconButton>
                 </Typography>
               </CardContent>
